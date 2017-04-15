@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100');
+
+body {
+    background: url("https://i.ytimg.com/vi/Xv6LPr9MZg4/maxresdefault.jpg") no-repeat fixed center;
+}
+
+h1 {
+	font-family: 'Raleway';
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+h3 {
+    font-family: 'Raleway';
+    color: white;
+}
+
+h4 {
+    font-family: 'Raleway';
+    color: white;
+}
+
+h5 {
+    font-family: 'Raleway';
+    color: white;
+}
+
+p {
+    font-family: 'Raleway';
+    font-size: 20px;
+    color:white;
+}
+
+#menuHeader {
+	font-family: 'Raleway';
+    text-align: center;
+    font-size: 50px;
+    color: white;
+}
