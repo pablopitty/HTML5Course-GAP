@@ -4,10 +4,10 @@
 		<script>
 			function readString (originalString){
 				var formatedString = originalString.replace(/[^A-Z0-9]/ig, "");
-				var temp = '';
+				var temp = "";
 				var upperCase = 0;
 				var lowerCase = 0;
-				var arrayCharCount = {};
+				var objCharCount = {};
 
 				for (var x = 0; x < formatedString.length; x++){
 					if (isNaN(temp = formatedString.charAt(x)))
@@ -22,24 +22,22 @@
 
 			        	temp = temp.toLowerCase()
 			        	
-			        	if(!isNaN(arrayCharCount[temp])){
-			        		arrayCharCount[temp] += 1;
+			        	if(objCharCount[temp] == undefined){
+			        		objCharCount[temp] = 0;
 			        	}
-
-			        	else{
-			        		arrayCharCount[temp] = 1;
-			        	}
+			        	
+			        	objCharCount[temp] += 1;
 			        }
 				}
 
 			    temp = "";
 
-				Object.keys(arrayCharCount).forEach(function(key) {
+				Object.keys(objCharCount).forEach(function(key) {
 				
-			        temp += key + "=" + arrayCharCount[key] + " ";
+			        temp += key + "=" + objCharCount[key] + " ";
 			    });
 
-			alert("Lower case characters: " + lowerCase + "\nUpper case characters: " + upperCase + "\n\n" + originalString + " -> " + temp);
+				alert("Lower case characters: " + lowerCase + "\nUpper case characters: " + upperCase + "\n\n" + originalString + " -> " + temp);
 			}
 
 			var inputText = window.prompt("Enter a string of text","Enter text here...");
