@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<script>
+			function readString (originalString){
+				var formatedString = originalString.replace(/[^A-Z0-9]/ig, "");
+				var temp = '';
+				var upperCase = 0;
+				var lowerCase = 0;
+				var arrayCharCount = {};
+
+				for (var x = 0; x < formatedString.length; x++){
+					if (isNaN(temp = formatedString.charAt(x)))
+					{
+						if (temp == temp.toUpperCase()) {
+							upperCase++;
+			        	}
+
+			        	else if(temp == temp.toLowerCase()){
+			        		lowerCase++;
+			        	}
+
+			        	temp = temp.toLowerCase()
+			        	
+			        	if(!isNaN(arrayCharCount[temp])){
+			        		arrayCharCount[temp] += 1;
+			        	}
+
+			        	else{
+			        		arrayCharCount[temp] = 1;
+			        	}
+			        }
+				}
+
+			    temp = "";
+
+				Object.keys(arrayCharCount).forEach(function(key) {
+				
+			        temp += key + "=" + arrayCharCount[key] + " ";
+			    });
+
+			alert("Lower case characters: " + lowerCase + "\nUpper case characters: " + upperCase + "\n\n" + originalString + " -> " + temp);
+			}
+
+			var inputText = window.prompt("Enter a string of text","Enter text here...");
+
+			if (inputText != null || inputText != "") {
+			    readString(inputText);
+			}
+		</script>
+	</body>
+</html>
