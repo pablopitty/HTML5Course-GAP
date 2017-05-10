@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<script>
+			function menu(){
+				switch(this.prompt('Please type an option:\n\n1. Create an object\n2. View created objects and its content\n3. Delete an object\n4. Delete object by entering a parameter and value','Enter your selection here...')){
+					case '1':
+						var tempObject = {};
+						tempObject = createProperty(tempObject);
+						objectArray.push(tempObject);
+
+						alert('Object added!');
+
+						menu();
+
+						break;
+
+					case '2':
+						if(objectArray.length === 0){
+							alert('Please create at least an object.');
+						}
+
+						else{
+							alert(printObjects());
+						}
+
+						menu();
+						
+						break;
+					
+					case '3':
+						if(objectArray.length === 0){
+							alert('Please create at least an object.');
+						}
+
+						else{
+							deleteObject();
+						}
+
+						menu();
+
+						break;
+
+					case '4':
+						if(objectArray.length === 0){
+							alert('Please create at least an object.');
+						}
+
+						else{
+							deleteObject2();
+						}
+
+						break;
+
+					default:
+						alert('Please type a valid option.');
+						menu();
+				}
+			}
+
+			function createProperty(object){
+				var propertyName = this.prompt('Enter property name:','Enter text here...');
+
+				while (propertyName === null || propertyName === ''){
+					alert('Your input is invalid.');
+					propertyName = this.prompt('Enter property name:','Enter text here...');
+				}
+
+				var propertyValue = this.prompt('Enter property value:','Enter value here...');
+
+				while (propertyValue === null || propertyValue === ''){
+					alert('Your input is invalid.');
+					propertyValue = this.prompt('Enter property value:','Enter value here...');
+				}
+
+				object[propertyName] = propertyValue;
+
+				if (confirm('Want to add another property?')){
+				    createProperty(object);
+				}
+
+				return object;
+			}
+
+			function printObjects(){
+				var temp = '';
+				var objectCount = 1;
+
+				objectArray.forEach(function(object){
+					temp += '\nObject ' + objectCount;
+
+					Object.keys(object).forEach(function(key){
+						temp += '\n\t\tProperty name: ' + key + '\n\t\tValue: ' + object[key] + '\n';
+			    	});
+
+			    	objectCount += 1;
+				});
+
+				return temp;
+			}
+
+			function deleteObject(){
+				var temp = this.prompt(printObjects(objectArray) + '\nEnter the object number you want to delete','Enter text here...');
+
+				while (isNaN(temp) || parseInt(temp) > objectArray.length){
+					alert('Your input is invalid.');
+					temp = this.prompt(printObjects(objectArray) + '\nEnter the object number you want to delete','Enter text here...');
+				}
+
+				objectArray.splice(parseInt(temp-1),1);
+				alert('Object removed.');
+			}
+
+			function deleteObject2(){
+				var temp = this.prompt(printObjects(objectArray) + '\nEnter the property-value combination of the object you want to delete using the format below:\n\t###,###\n*case sensitive','Enter text here...');
+
+				while (temp === null || temp === ''){
+					alert('Your input is invalid.');
+					temp = temp = this.prompt(printObjects(objectArray) + '\nEnter the property-value combination of the object you want to delete using the format below:\n\t###,###\n*case sensitive','Enter text here...');
+				}
+
+				temp = temp.split(',');
+
+				objectArray.forEach(function(object, index){
+					Object.keys(object).forEach(function(key){
+						if(key===temp[0] && object[key]===temp[1]){
+							objectArray.splice(index,1);
+							alert('Object removed.');
+							throw menu();
+						}						
+			    	});
+				});
+
+				alert('Cannot find object based on the property-value combination entered.');
+				menu();
+			}
+
+			var objectArray = [];
+			menu(objectArray);
+		</script>
+	</body>
+</html>
